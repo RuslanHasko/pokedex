@@ -1,0 +1,31 @@
+{
+  "name": "pokedex",
+  "description": "pokedex test task",
+  "main": "build/index.html",
+  "authors": [
+    "Ruslan Hasko <pc.ruslanhasko@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "#1.5.8",
+    "angular-animate": "#1.5.8",
+    "angular-sanitize": "#1.5.8",
+    "angular-ui-router": "#0.3.2",
+    "angular-route": "#1.5.8",
+    "angular-strap": "2.3.10",
+    "bootstrap": "~3.3.7",
+    "jquery": "#~3.1.1",
+    "normalize-less": "*",
+    "angular-resource": "1.5.8"
+  }
+}
