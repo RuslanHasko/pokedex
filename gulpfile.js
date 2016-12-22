@@ -23,6 +23,7 @@ var notifyOptions = {
 var path = {
   build: {
     html: 'build/',
+    angularViews: 'build/views',
     ico: 'build/',
     js: 'build/js/',
     jsonData: 'build/json/',
@@ -32,6 +33,7 @@ var path = {
   },
   src: {
     html: 'src/*.html',
+    angularViews: 'src/views/*.html',
     ico: 'src/*.ico',
     jsLibs: 'src/js/libs.js',
     jsMain: 'src/js/main.js',
@@ -42,7 +44,8 @@ var path = {
     fonts: 'src/fonts/'
   },
   watch: {
-    html: 'src/**/*.html',
+    html: 'src/*.html',
+    angularViews: 'src/views/**/*.html',
     ico: 'src/*.ico',
     jsLibs: 'src/js/libs.js',
     jsMain: 'src/js/main.js',
@@ -77,6 +80,16 @@ gulp.task('html:build', function () {
 
   gulp.src(path.src.ico)
       .pipe(gulp.dest(path.build.ico))
+      .on('error', notify.onError(notifyOptions))
+      .pipe(reload({stream: true}))
+      .on('error', notify.onError(notifyOptions));
+});
+
+gulp.task('angularViews:build', function () {
+  gulp.src(path.src.angularViews)
+      .pipe(rigger())
+      .on('error', notify.onError(notifyOptions))
+      .pipe(gulp.dest(path.build.angularViews))
       .on('error', notify.onError(notifyOptions))
       .pipe(reload({stream: true}))
       .on('error', notify.onError(notifyOptions));
@@ -180,6 +193,7 @@ gulp.task('fonts:build', function() {
 
 gulp.task('build', [
   'html:build',
+  'angularViews:build',
   'jsLibs:build',
   'jsMain:build',
   'jsAngular:build',
@@ -190,14 +204,15 @@ gulp.task('build', [
 ]);
 
 gulp.task('watch', function(){
-  gulp.watch(path.watch.html,       ['html:build']      );
-  gulp.watch(path.watch.style,      ['css:build']       );
-  gulp.watch(path.watch.jsLibs,     ['jsLibs:build']    );
-  gulp.watch(path.watch.jsMain,     ['jsMain:build']    );
-  gulp.watch(path.watch.jsAngular,  ['jsAngular:build'] );
-  gulp.watch(path.watch.jsonData,   ['jsonData:build']  );
-  gulp.watch(path.watch.img,        ['img:build']       );
-  gulp.watch(path.watch.fonts,      ['fonts:build']     );
+  gulp.watch(path.watch.html,       ['html:build']          );
+  gulp.watch(path.watch.html,       ['angularViews:build']  );
+  gulp.watch(path.watch.style,      ['css:build']           );
+  gulp.watch(path.watch.jsLibs,     ['jsLibs:build']        );
+  gulp.watch(path.watch.jsMain,     ['jsMain:build']        );
+  gulp.watch(path.watch.jsAngular,  ['jsAngular:build']     );
+  gulp.watch(path.watch.jsonData,   ['jsonData:build']      );
+  gulp.watch(path.watch.img,        ['img:build']           );
+  gulp.watch(path.watch.fonts,      ['fonts:build']         );
 });
 
 gulp.task('server', function () {

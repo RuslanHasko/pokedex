@@ -1,0 +1,17 @@
+<section>
+    <div class="row">
+        <div ng-repeat="pokemon in pokemonsList" class="col-sm-12 col-md-4">
+            <div class="thumbnail thumbnail_pokemon">
+                <img src="{{pokemon.img}}" alt="{{pokemon.name}}">
+                <div class="caption">
+                    <h3>{{ pokemon.name }}</h3>
+                    <div class="types">
+                        <span ng-repeat="type in pokemon.types" class="label label-default" ng-class="type.name">{{type.name}}</span>
+                    </div>
+                    <p><a href="#" class="btn btn-success" role="button">Add to favorite</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" name="button" ng-click="loadMore()">Load more</button>
+</section>
